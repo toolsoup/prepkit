@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Emergency Preparedness Kit | Thompson Family</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23c44536%22/><text y=%2272%22 x=%2250%22 text-anchor=%22middle%22 font-size=%2260%22>&#x1F6E1;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-primary: #0c0f14;
@@ -43,14 +44,15 @@
     font-family: var(--font-body);
     background: var(--bg-primary);
     color: var(--text-primary);
-    line-height: 1.55;
+    line-height: 1.6;
     min-height: 100vh;
+    font-size: 16px;
   }
 
   .app-container {
-    max-width: 860px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 32px 20px 60px;
+    padding: 36px 24px 60px;
   }
 
   /* ── Header ── */
@@ -63,23 +65,23 @@
     gap: 14px;
   }
   .header-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
+    width: 50px; height: 50px;
+    border-radius: 12px;
     background: linear-gradient(135deg, #c44536 0%, #d4a746 100%);
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
+    font-size: 26px;
     flex-shrink: 0;
   }
   .header h1 {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.6px;
     color: #f2efea;
   }
   .header .subtitle {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-muted);
-    margin: 4px 0 0 58px;
+    margin: 6px 0 0 66px;
   }
 
   /* ── Summary Strip ── */
@@ -96,7 +98,7 @@
     padding: 14px 16px;
   }
   .summary-card .label {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -104,9 +106,9 @@
   }
   .summary-card .value {
     font-family: var(--font-mono);
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 500;
-    margin-top: 4px;
+    margin-top: 6px;
   }
   .summary-card .value.gold { color: var(--accent-gold); }
   .summary-card .value.green { color: var(--accent-green); }
@@ -135,12 +137,12 @@
     align-items: center;
   }
   .filter-btn {
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 20px;
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text-secondary);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     font-family: var(--font-body);
     cursor: pointer;
@@ -154,12 +156,12 @@
   }
   .toolbar-spacer { flex: 1; }
   .pdf-btn {
-    padding: 7px 16px;
+    padding: 8px 18px;
     border-radius: 20px;
     border: 1px solid var(--accent-green);
     background: var(--accent-green-dim);
     color: var(--accent-green);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     font-family: var(--font-body);
     cursor: pointer;
@@ -170,12 +172,12 @@
   }
   .pdf-btn:hover { background: rgba(58,157,110,0.25); }
   .reset-btn {
-    padding: 7px 16px;
+    padding: 8px 18px;
     border-radius: 20px;
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     font-family: var(--font-body);
     cursor: pointer;
@@ -219,14 +221,14 @@
   }
   .cat-info { flex: 1; }
   .cat-title {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 700;
     letter-spacing: -0.2px;
   }
   .cat-meta {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-muted);
-    margin-top: 2px;
+    margin-top: 3px;
     font-family: var(--font-mono);
   }
   .cat-chevron {
@@ -240,11 +242,12 @@
     padding: 0 14px 16px;
   }
   .cat-desc {
-    padding: 0 4px 12px;
-    font-size: 13px;
+    padding: 0 4px 14px;
+    font-size: 15px;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border);
     margin-bottom: 4px;
+    line-height: 1.6;
   }
 
   /* ── Items ── */
@@ -281,9 +284,9 @@
 
   .item-content { flex: 1; min-width: 0; }
   .item-name {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 1.4;
     color: var(--text-primary);
   }
   .item.checked .item-name {
@@ -299,22 +302,22 @@
   }
   .item-qty {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 14px;
     color: var(--accent-gold);
     font-weight: 500;
   }
   .item-price {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-secondary);
   }
   .item-store {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--text-muted);
   }
   .priority-tag {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
-    padding: 1px 7px;
+    padding: 2px 8px;
     border-radius: 4px;
     letter-spacing: 0.3px;
   }
@@ -323,11 +326,11 @@
   .priority-tag.low { background: var(--priority-low-bg); color: var(--priority-low-text); }
 
   .item-note {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-muted);
-    margin-top: 3px;
+    margin-top: 4px;
     font-style: italic;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   /* ── Strategy Notes ── */
@@ -339,17 +342,17 @@
     border-radius: var(--radius);
   }
   .strategy-notes h3 {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--accent-gold);
     margin-bottom: 14px;
     letter-spacing: -0.2px;
   }
   .strategy-notes p {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.65;
-    margin-bottom: 10px;
+    line-height: 1.7;
+    margin-bottom: 12px;
   }
   .strategy-notes p:last-child { margin-bottom: 0; }
   .strategy-notes strong {
