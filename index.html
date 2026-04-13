@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Preparedness Kit | Thompson Family</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0c0f14;
+    --bg-secondary: #12161e;
+    --bg-card: rgba(255,255,255,0.025);
+    --bg-card-hover: rgba(255,255,255,0.045);
+    --border: rgba(255,255,255,0.07);
+    --border-active: rgba(255,255,255,0.14);
+    --text-primary: #e8e5e0;
+    --text-secondary: #918b84;
+    --text-muted: #5e5952;
+    --accent-gold: #d4a746;
+    --accent-gold-dim: rgba(212,167,70,0.12);
+    --accent-green: #3a9d6e;
+    --accent-green-dim: rgba(58,157,110,0.15);
+    --accent-red: #c44536;
+    --accent-red-dim: rgba(196,69,54,0.12);
+    --accent-blue: #3a7ca5;
+    --accent-blue-dim: rgba(58,124,165,0.12);
+    --priority-high-bg: #3d1c1c;
+    --priority-high-text: #e8847a;
+    --priority-med-bg: #3d2e12;
+    --priority-med-text: #d4a746;
+    --priority-low-bg: #152938;
+    --priority-low-text: #6aafdb;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --font-mono: 'DM Mono', 'Menlo', monospace;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  .app-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* ── Header ── */
+  .header {
+    margin-bottom: 28px;
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #c44536 0%, #d4a746 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: #f2efea;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 4px 0 0 58px;
+  }
+
+  /* ── Summary Strip ── */
+  .summary-strip {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .summary-card .label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .summary-card .value {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  .summary-card .value.gold { color: var(--accent-gold); }
+  .summary-card .value.green { color: var(--accent-green); }
+
+  /* ── Progress ── */
+  .progress-track {
+    margin-top: 14px;
+    height: 5px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-green), #6dd5a0);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── Toolbar ── */
+  .toolbar {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--border-active); color: var(--text-primary); }
+  .filter-btn.active {
+    border-color: rgba(212,167,70,0.4);
+    background: var(--accent-gold-dim);
+    color: var(--accent-gold);
+  }
+  .toolbar-spacer { flex: 1; }
+  .pdf-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--accent-green);
+    background: var(--accent-green-dim);
+    color: var(--accent-green);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pdf-btn:hover { background: rgba(58,157,110,0.25); }
+  .reset-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
+
+  /* ── Categories ── */
+  .category {
+    margin-top: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+    transition: background 0.2s;
+  }
+  .category.expanded { background: var(--bg-card-hover); }
+
+  .cat-header {
+    width: 100%;
+    padding: 16px 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    text-align: left;
+  }
+  .cat-icon {
+    font-size: 22px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .cat-info { flex: 1; }
+  .cat-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .cat-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+  }
+  .cat-chevron {
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+  .cat-chevron.open { transform: rotate(180deg); }
+
+  .cat-body {
+    padding: 0 14px 16px;
+  }
+  .cat-desc {
+    padding: 0 4px 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+
+  /* ── Items ── */
+  .item {
+    padding: 12px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .item:last-child { border-bottom: none; }
+  .item.checked { opacity: 0.4; }
+  .item:hover { background: rgba(255,255,255,0.015); border-radius: 6px; }
+
+  .checkbox {
+    width: 20px; height: 20px; min-width: 20px;
+    border-radius: 5px;
+    border: 2px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+    transition: all 0.15s;
+    font-size: 12px;
+    color: var(--bg-primary);
+    font-weight: 700;
+  }
+  .checkbox.checked {
+    border-color: var(--accent-green);
+    background: var(--accent-green);
+  }
+
+  .item-content { flex: 1; min-width: 0; }
+  .item-name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+  }
+  .item.checked .item-name {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+  .item-details {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .item-qty {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+  .item-price {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .item-store {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .priority-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+  }
+  .priority-tag.high { background: var(--priority-high-bg); color: var(--priority-high-text); }
+  .priority-tag.medium { background: var(--priority-med-bg); color: var(--priority-med-text); }
+  .priority-tag.low { background: var(--priority-low-bg); color: var(--priority-low-text); }
+
+  .item-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* ── Strategy Notes ── */
+  .strategy-notes {
+    margin-top: 28px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .strategy-notes h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 14px;
+    letter-spacing: -0.2px;
+  }
+  .strategy-notes p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .strategy-notes p:last-child { margin-bottom: 0; }
+  .strategy-notes strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ── Print / PDF Styles ── */
+  @media print {
+    :root {
+      --bg-primary: #fff;
+      --bg-secondary: #fff;
+      --bg-card: #fff;
+      --bg-card-hover: #fff;
+      --border: #ddd;
+      --border-active: #bbb;
+      --text-primary: #111;
+      --text-secondary: #555;
+      --text-muted: #888;
+      --accent-gold: #8a6d1b;
+      --accent-gold-dim: #f5ecd5;
+      --accent-green: #1a7a42;
+      --accent-green-dim: #d4f0e0;
+      --accent-red: #a33327;
+      --accent-red-dim: #f5d9d5;
+      --accent-blue: #2a6080;
+      --accent-blue-dim: #d5e8f4;
+      --priority-high-bg: #fde8e6;
+      --priority-high-text: #a33327;
+      --priority-med-bg: #fdf3dc;
+      --priority-med-text: #8a6d1b;
+      --priority-low-bg: #deeef7;
+      --priority-low-text: #2a6080;
+    }
+
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .app-container { padding: 10px 0; max-width: 100%; }
+
+    .toolbar { display: none !important; }
+    .pdf-btn, .reset-btn, .filter-btn { display: none !important; }
+    .header-icon { background: #ddd !important; }
+
+    /* Force all categories open for print */
+    .cat-body { display: block !important; }
+    .cat-body.print-show { display: block !important; }
+    .cat-chevron { display: none !important; }
+
+    .category {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-top: 12px;
+      border: 1px solid #ccc;
+    }
+
+    .item { break-inside: avoid; page-break-inside: avoid; }
+    .item.checked { opacity: 0.5; }
+
+    .checkbox { border-color: #aaa !important; background: #fff !important; }
+    .checkbox.checked { border-color: #1a7a42 !important; background: #1a7a42 !important; }
+
+    .progress-track { display: none; }
+
+    .summary-strip {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .summary-card {
+      border: 1px solid #ccc;
+      background: #fafafa !important;
+    }
+
+    .strategy-notes {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      border: 1px solid #ccc;
+      background: #fafafa !important;
+    }
+
+    .strategy-notes h3 { color: #8a6d1b !important; }
+    
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .summary-strip { grid-template-columns: 1fr; }
+    .header h1 { font-size: 20px; }
+    .app-container { padding: 20px 14px 40px; }
+  }
+
+  /* ── Animations ── */
+  .category { animation: fadeUp 0.3s ease both; }
+  .category:nth-child(1) { animation-delay: 0.05s; }
+  .category:nth-child(2) { animation-delay: 0.1s; }
+  .category:nth-child(3) { animation-delay: 0.15s; }
+  .category:nth-child(4) { animation-delay: 0.2s; }
+  .category:nth-child(5) { animation-delay: 0.25s; }
+  .category:nth-child(6) { animation-delay: 0.3s; }
+  .category:nth-child(7) { animation-delay: 0.35s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-container" id="app"></div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const CATEGORIES = [
+  {
+    id: "groceries",
+    icon: "\u{1F96B}",
+    title: "Staple Groceries (90-Day Pantry)",
+    bgColor: "rgba(45,106,79,0.15)",
+    description: "Build gradually over 3-4 weeks of normal shopping trips at Kroger/ALDI. Buy 2-3 extra items per trip.",
+    items: [
+      { name: "Long-grain white rice (25 lb bag)", qty: "2 bags", price: "$12-15 ea", store: "ALDI/Kroger", priority: "high", note: "Earthly Grains at ALDI is best value" },
+      { name: "Dried pinto beans (4 lb bag)", qty: "4 bags", price: "$4-5 ea", store: "Kroger", priority: "high", note: "25+ year shelf life if kept dry" },
+      { name: "Dried black beans (4 lb bag)", qty: "2 bags", price: "$4-5 ea", store: "ALDI", priority: "high", note: "" },
+      { name: "Dried lentils (1 lb bag)", qty: "6 bags", price: "$1.50 ea", store: "ALDI", priority: "high", note: "No soaking needed. Cook in 20 min" },
+      { name: "Old-fashioned oats (42 oz)", qty: "4 containers", price: "$3-4 ea", store: "ALDI", priority: "high", note: "Pairs with chia seeds" },
+      { name: "Chia seeds (12 oz)", qty: "4 bags", price: "$4-5 ea", store: "ALDI", priority: "medium", note: "Already in your daily routine" },
+      { name: "Peanut butter (40 oz jar)", qty: "4 jars", price: "$5-6 ea", store: "Kroger", priority: "high", note: "~190 cal/serving, high protein" },
+      { name: "Honey (3 lb container)", qty: "2 containers", price: "$10-12 ea", store: "Kroger", priority: "medium", note: "Never expires. Medicinal uses too" },
+      { name: "Canned chicken breast (12.5 oz)", qty: "12 cans", price: "$2.50-3 ea", store: "Kroger", priority: "high", note: "No cooking needed" },
+      { name: "Canned tuna (5 oz)", qty: "12 cans", price: "$1-1.50 ea", store: "ALDI", priority: "high", note: "" },
+      { name: "Canned sardines in olive oil", qty: "12 cans", price: "$1.50-2 ea", store: "ALDI", priority: "medium", note: "Omega-3s, long shelf life" },
+      { name: "Canned black beans (15 oz)", qty: "12 cans", price: "$0.80-1 ea", store: "ALDI", priority: "medium", note: "Ready-to-eat backup for dried" },
+      { name: "Canned diced tomatoes (14.5 oz)", qty: "12 cans", price: "$0.80-1 ea", store: "ALDI", priority: "medium", note: "Base for rice/bean meals" },
+      { name: "Canned vegetables (mixed, corn, green beans)", qty: "18 cans", price: "$0.70-1 ea", store: "ALDI", priority: "medium", note: "6 of each type" },
+      { name: "Pasta (spaghetti/penne, 1 lb)", qty: "8 boxes", price: "$1-1.25 ea", store: "ALDI", priority: "medium", note: "" },
+      { name: "Pasta sauce (24 oz jar)", qty: "4 jars", price: "$1.50-2 ea", store: "ALDI", priority: "low", note: "" },
+      { name: "Vegetable/canola cooking oil (48 oz)", qty: "2 bottles", price: "$4-5 ea", store: "Kroger", priority: "high", note: "240 cal/tbsp. Essential for cooking" },
+      { name: "Salt (26 oz container)", qty: "3 containers", price: "$0.50-1 ea", store: "ALDI", priority: "high", note: "Also useful for food preservation" },
+      { name: "Sugar (4 lb bag)", qty: "2 bags", price: "$3-4 ea", store: "ALDI", priority: "medium", note: "" },
+      { name: "All-purpose flour (5 lb bag)", qty: "2 bags", price: "$2-3 ea", store: "ALDI", priority: "medium", note: "Flatbread, thickener, baking" },
+      { name: "Baking powder", qty: "1 can", price: "$2", store: "Kroger", priority: "low", note: "For flatbread/biscuits" },
+      { name: "Instant coffee (8 oz jar)", qty: "2 jars", price: "$5-6 ea", store: "Kroger", priority: "low", note: "Morale booster" },
+      { name: "Powdered milk (25.6 oz)", qty: "2 boxes", price: "$7-8 ea", store: "Kroger", priority: "medium", note: "Calcium + protein, no fridge needed" },
+      { name: "Bouillon cubes (chicken/beef)", qty: "2 jars", price: "$3-4 ea", store: "Kroger", priority: "low", note: "Flavor for rice/bean meals" },
+      { name: "Multivitamins (200 ct)", qty: "1 bottle", price: "$8-10", store: "Kroger", priority: "medium", note: "Insurance against limited diet" },
+      { name: "Dried fruit & nut trail mix (26 oz)", qty: "3 bags", price: "$6-8 ea", store: "ALDI", priority: "medium", note: "Calorie-dense snack" },
+      { name: "Protein bars (12-pack)", qty: "2 boxes", price: "$10-12 ea", store: "Kroger", priority: "medium", note: "Grab-and-go calories" },
+      { name: "Apple cider vinegar (32 oz)", qty: "1 bottle", price: "$3", store: "ALDI", priority: "low", note: "Cooking, cleaning, preserving" },
+      { name: "Spices (garlic powder, chili, cumin, pepper)", qty: "4 containers", price: "$1-2 ea", store: "ALDI", priority: "low", note: "Variety from simple ingredients" },
+    ],
+  },
+  {
+    id: "water",
+    icon: "\u{1F4A7}",
+    title: "Water Security",
+    bgColor: "rgba(29,53,87,0.2)",
+    description: "1 gallon per person per day. Family of 4 needs minimum 14 gallons for 2 weeks.",
+    items: [
+      { name: "5-gal BPA-free water jugs (Reliance Aqua-Tainer)", qty: "4 jugs", price: "$10-12 ea", store: "Walmart/Amazon", priority: "high", note: "Fill from tap now. 20 gallons total" },
+      { name: "Cases of bottled water (24-pack 16.9 oz)", qty: "4 cases", price: "$4-5 ea", store: "ALDI", priority: "high", note: "Grab-and-go option" },
+      { name: "Berkey or ProOne gravity water filter", qty: "1 unit", price: "$250-350", store: "Amazon/Direct", priority: "high", note: "No electricity. Filters bacteria, viruses, chemicals" },
+      { name: "Replacement filter elements (pair)", qty: "1 set", price: "$100-130", store: "Amazon", priority: "medium", note: "Each pair lasts 6,000 gallons" },
+      { name: "Sawyer Squeeze water filter (portable)", qty: "1 unit", price: "$30-35", store: "Amazon", priority: "medium", note: "Backup filter. 100,000 gallon capacity" },
+      { name: "Water purification tablets (Aquatabs, 100 ct)", qty: "2 packs", price: "$8-10 ea", store: "Amazon", priority: "medium", note: "Chemical backup if filters fail" },
+      { name: "55-gallon rain barrel with spigot", qty: "1-2 barrels", price: "$50-80 ea", store: "Tractor Supply", priority: "medium", note: "Connect to downspout. Filter before drinking" },
+      { name: "Unscented liquid bleach (Clorox 8.25%)", qty: "1 gallon", price: "$4", store: "Kroger", priority: "high", note: "8 drops per gallon purifies water" },
+    ],
+  },
+  {
+    id: "solar",
+    icon: "\u2600\uFE0F",
+    title: "Portable Solar Power",
+    bgColor: "rgba(231,111,81,0.12)",
+    description: "Keep RE101 running during outages. Power phones, laptops, router, fridge.",
+    items: [
+      { name: "EcoFlow DELTA 2 (1024Wh, 1800W)", qty: "1 unit", price: "$699-799", store: "Amazon/EcoFlow.com", priority: "high", note: "Best balance of power, price, fast charging. Runs fridge 8-10 hrs" },
+      { name: "EcoFlow 220W bifacial solar panel", qty: "2 panels", price: "$300-350 ea", store: "Amazon/EcoFlow.com", priority: "high", note: "Full recharge in 3-4 hrs direct sun with 2 panels" },
+      { name: "EcoFlow DELTA 2 extra battery (1024Wh)", qty: "1 unit", price: "$499-599", store: "Amazon", priority: "low", note: "Doubles capacity to 2048Wh. Add later if budget allows" },
+      { name: "Anker 737 Power Bank (24,000mAh)", qty: "1 unit", price: "$90-110", store: "Amazon", priority: "medium", note: "Portable phone/laptop charging on the go" },
+      { name: "12V car charger cable for power station", qty: "1 cable", price: "$15-20", store: "Amazon", priority: "low", note: "Recharge from vehicle if needed" },
+      { name: "Heavy-duty extension cord (25 ft, 12 AWG)", qty: "1 cord", price: "$25-30", store: "Lowe's", priority: "low", note: "Run power from garage to fridge inside" },
+    ],
+  },
+  {
+    id: "cooking",
+    icon: "\u{1F525}",
+    title: "Camping Stoves & Solar Ovens",
+    bgColor: "rgba(155,34,38,0.12)",
+    description: "Cook without grid power. Propane for reliability, solar for free fuel.",
+    items: [
+      { name: "Coleman Classic 2-Burner Propane Stove", qty: "1 unit", price: "$45-55", store: "Walmart/Amazon", priority: "high", note: "Reliable, cooks like a stove. Outdoor use only" },
+      { name: "Coleman 16 oz propane cylinders (4-pack)", qty: "3 packs", price: "$15-18 ea", store: "Walmart", priority: "high", note: "12 total = ~24 hrs cooking time" },
+      { name: "Propane adapter hose (1 lb to 20 lb tank)", qty: "1 adapter", price: "$15-20", store: "Amazon", priority: "medium", note: "Connect stove to standard grill tank" },
+      { name: "20 lb propane tank (refillable)", qty: "2 tanks", price: "$20-30 ea", store: "Walmart/gas station", priority: "medium", note: "Each lasts 20+ hrs cooking. Keep one backup" },
+      { name: "All American Sun Oven (complete kit)", qty: "1 unit", price: "$350-400", store: "Amazon/SunOven.com", priority: "medium", note: "360-400F. Bake, boil, steam. Zero fuel cost. AR summers ideal" },
+      { name: "Sunflair Portable Solar Oven Deluxe", qty: "1 unit", price: "$70-90", store: "Amazon", priority: "low", note: "Ultra-portable. Folds flat. Good for car kit" },
+      { name: "Cast iron Dutch oven (6 qt, Lodge)", qty: "1 unit", price: "$40-60", store: "Amazon/Lodge", priority: "medium", note: "Camp stove, solar oven, open fire. Lasts forever" },
+      { name: "Solo Stove Lite (wood-burning backpacking stove)", qty: "1 unit", price: "$50-70", store: "Amazon", priority: "low", note: "Burns twigs/sticks. Free fuel forever" },
+      { name: "Stormproof matches + BIC lighters (5-pack)", qty: "1 set each", price: "$14 total", store: "Walmart", priority: "high", note: "Redundant fire-starting" },
+    ],
+  },
+  {
+    id: "bugout",
+    icon: "\u{1F392}",
+    title: "Bug Out Bag (72-Hour Kit)",
+    bgColor: "rgba(106,4,15,0.12)",
+    description: "One bag per adult. Grab-and-go. Keep by the door. Target weight under 25 lbs.",
+    items: [
+      { name: "Backpack (40-50L, internal frame)", qty: "1 per person", price: "$60-100", store: "Amazon/REI", priority: "high", note: "Osprey Talon 44 or similar. Hip belt is non-negotiable" },
+      { name: "Sawyer Squeeze water filter", qty: "1 per bag", price: "$30-35", store: "Amazon", priority: "high", note: "100,000 gallon capacity. Weighs 3 oz" },
+      { name: "Nalgene 32 oz water bottle", qty: "2 per bag", price: "$10-12 ea", store: "Amazon/REI", priority: "high", note: "Durable. Fill before you leave" },
+      { name: "Water purification tablets (50 ct)", qty: "1 per bag", price: "$8-10", store: "Amazon", priority: "medium", note: "Backup to filter" },
+      { name: "Emergency ration bars (3600 cal, 3-day)", qty: "1 per bag", price: "$8-12", store: "Amazon", priority: "high", note: "Datrex or Mainstay. 5-year shelf life. No cooking" },
+      { name: "Protein/energy bars (6-pack)", qty: "1 per bag", price: "$8-10", store: "Kroger", priority: "medium", note: "Rotate every 6 months" },
+      { name: "Emergency bivy sack (SOL brand)", qty: "1 per bag", price: "$15-20", store: "Amazon", priority: "high", note: "Reflects 90% body heat. 3.5 oz" },
+      { name: "Tarp (8x10 ft, ripstop nylon)", qty: "1 per bag", price: "$20-30", store: "Amazon", priority: "medium", note: "Shelter, ground cover, rain catch" },
+      { name: "550 paracord (100 ft)", qty: "1 per bag", price: "$8-10", store: "Amazon", priority: "medium", note: "Shelter, repairs, general use" },
+      { name: "First aid kit (IFAK style)", qty: "1 per bag", price: "$25-40", store: "Amazon", priority: "high", note: "Tourniquet, gauze, tape, meds, antiseptic, gloves" },
+      { name: "Prescription meds (7-day supply)", qty: "As needed", price: "Varies", store: "Pharmacy", priority: "high", note: "Rotate with current supply" },
+      { name: "Headlamp (Black Diamond or Petzl)", qty: "1 per bag", price: "$25-35", store: "Amazon/REI", priority: "high", note: "Hands-free. 300+ lumens. Extra batteries" },
+      { name: "Batteries (AA/AAA variety pack)", qty: "1 per bag", price: "$10-12", store: "Kroger", priority: "medium", note: "Match to your headlamp" },
+      { name: "Multi-tool (Leatherman Wave+)", qty: "1 per bag", price: "$80-100", store: "Amazon/REI", priority: "high", note: "Knife, pliers, saw, screwdriver in one" },
+      { name: "Fixed-blade knife (Morakniv Companion)", qty: "1 per bag", price: "$15-18", store: "Amazon", priority: "medium", note: "Tougher than a folder" },
+      { name: "Fire kit (ferro rod + waterproof matches + lighter)", qty: "1 set per bag", price: "$12-15", store: "Amazon", priority: "high", note: "Three methods. Redundancy matters" },
+      { name: "Emergency radio (hand-crank/solar, NOAA)", qty: "1 per household", price: "$25-40", store: "Amazon", priority: "high", note: "Get one with USB port for phone charging" },
+      { name: "Compass (Suunto A-10 or similar)", qty: "1 per bag", price: "$20-30", store: "Amazon/REI", priority: "medium", note: "Phones die. Compass doesn't" },
+      { name: "Paper road map (AR + surrounding states)", qty: "1 per bag", price: "$5-10", store: "Gas station/Amazon", priority: "medium", note: "" },
+      { name: "Document copies (laminated, waterproof bag)", qty: "1 set per bag", price: "$5-10", store: "FedEx/home printer", priority: "high", note: "IDs, insurance, deeds, bank info, emergency contacts" },
+      { name: "Cash (small bills)", qty: "$200-500 per bag", price: "--", store: "Bank", priority: "high", note: "Mix of $1, $5, $10, $20. ATMs may be down" },
+      { name: "Change of clothes (quick-dry)", qty: "1 set per bag", price: "$30-50", store: "Walmart", priority: "medium", note: "Socks, underwear, shirt, pants. Avoid cotton" },
+      { name: "Rain poncho (heavy duty)", qty: "1 per bag", price: "$8-12", store: "Amazon", priority: "medium", note: "Also works as ground sheet or shelter" },
+      { name: "N95 masks (10-pack)", qty: "1 pack per bag", price: "$10-15", store: "Lowe's/Amazon", priority: "low", note: "Smoke, dust, air quality events" },
+      { name: "Contractor trash bags (3 mil)", qty: "3-5 per bag", price: "$2", store: "Lowe's", priority: "low", note: "Waterproofing, waste, rain gear" },
+      { name: "Duct tape (mini roll)", qty: "1 per bag", price: "$3-5", store: "Walmart", priority: "low", note: "Repairs everything" },
+    ],
+  },
+  {
+    id: "household",
+    icon: "\u{1F3E0}",
+    title: "Household Essentials (Stock Up Now)",
+    bgColor: "rgba(74,78,105,0.15)",
+    description: "Items that will cost more in 3-6 months due to shipping and fuel cost increases.",
+    items: [
+      { name: "Toilet paper (mega pack)", qty: "2 packs", price: "$15-20 ea", store: "Kroger/ALDI", priority: "high", note: "Buy what you normally use, just double it" },
+      { name: "Paper towels (8-roll pack)", qty: "2 packs", price: "$8-12 ea", store: "Kroger", priority: "medium", note: "" },
+      { name: "Dish soap (large bottle)", qty: "2 bottles", price: "$3-4 ea", store: "ALDI", priority: "medium", note: "" },
+      { name: "Laundry detergent (large jug)", qty: "2 jugs", price: "$10-12 ea", store: "ALDI", priority: "medium", note: "" },
+      { name: "Body soap / shampoo", qty: "2-3 months extra", price: "$10-15 total", store: "ALDI", priority: "low", note: "" },
+      { name: "Toothpaste (2-pack)", qty: "2 packs", price: "$5-6 ea", store: "Kroger", priority: "low", note: "" },
+      { name: "OTC meds (ibuprofen, Tylenol, Benadryl, Pepto)", qty: "1 extra each", price: "$20-30 total", store: "Kroger", priority: "medium", note: "Pain, allergy, stomach basics" },
+      { name: "Batteries (AA, AAA, D variety)", qty: "2 packs", price: "$10-15 ea", store: "Kroger/Walmart", priority: "medium", note: "Flashlights, radios, devices" },
+      { name: "Manual can opener (quality)", qty: "1 unit", price: "$8-12", store: "Amazon/Walmart", priority: "high", note: "All those canned goods are useless without this" },
+    ],
+  },
+];
+
+const PRIORITY_LABELS = { high: "Must Have", medium: "Should Have", low: "Nice to Have" };
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let state = {
+  expandedCat: "groceries",
+  checkedItems: {},
+  filterPriority: "all",
+};
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem("prepkit_checked");
+    if (saved) state.checkedItems = JSON.parse(saved);
+  } catch(e) {}
+}
+
+function saveChecked() {
+  try {
+    localStorage.setItem("prepkit_checked", JSON.stringify(state.checkedItems));
+  } catch(e) {}
+}
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+function calcCategoryTotal(cat) {
+  let low = 0, high = 0;
+  cat.items.forEach(item => {
+    const nums = item.price.replace(/[^0-9.\-]/g, " ").trim().split(/[\s\-]+/).map(Number).filter(n => !isNaN(n) && n > 0);
+    if (!nums.length) return;
+    const qm = item.qty.match(/(\d+)/);
+    const qty = qm ? parseInt(qm[1]) : 1;
+    low += nums[0] * qty;
+    high += (nums[1] || nums[0]) * qty;
+  });
+  return { low: Math.round(low), high: Math.round(high) };
+}
+
+function totalChecked() {
+  return Object.values(state.checkedItems).filter(Boolean).length;
+}
+function totalItems() {
+  return CATEGORIES.reduce((s, c) => s + c.items.length, 0);
+}
+function grandTotal() {
+  let low = 0, high = 0;
+  CATEGORIES.forEach(c => { const t = calcCategoryTotal(c); low += t.low; high += t.high; });
+  return { low, high };
+}
+function catCheckedCount(cat) {
+  return cat.items.filter((_, i) => state.checkedItems[cat.id + "-" + i]).length;
+}
+
+// ═══════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════
+function render() {
+  const gt = grandTotal();
+  const tc = totalChecked();
+  const ti = totalItems();
+  const pct = ti > 0 ? (tc / ti * 100) : 0;
+
+  let html = `
+    <div class="header">
+      <div class="header-row">
+        <div class="header-icon">\u{1F6E1}</div>
+        <h1>Emergency Preparedness Kit</h1>
+      </div>
+      <div class="subtitle">Thompson Family Shopping List &mdash; 90-day shelter-in-place + 72-hour bug-out capability</div>
+
+      <div class="summary-strip">
+        <div class="summary-card">
+          <div class="label">Est. Total</div>
+          <div class="value gold">$${gt.low.toLocaleString()}&ndash;$${gt.high.toLocaleString()}</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Progress</div>
+          <div class="value green">${tc} / ${ti}</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Categories</div>
+          <div class="value" style="color:var(--text-primary)">${CATEGORIES.length}</div>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" style="width:${pct}%"></div>
+      </div>
+
+      <div class="toolbar">
+        ${["all","high","medium","low"].map(p =>
+          `<button class="filter-btn ${state.filterPriority===p?'active':''}" onclick="setFilter('${p}')">${p==='all'?'All Items':PRIORITY_LABELS[p]}</button>`
+        ).join("")}
+        <div class="toolbar-spacer"></div>
+        <button class="pdf-btn" onclick="exportPDF()">\u{1F4C4} Download PDF</button>
+        <button class="reset-btn" onclick="resetChecks()">Reset</button>
+      </div>
+    </div>
+  `;
+
+  CATEGORIES.forEach(cat => {
+    const isOpen = state.expandedCat === cat.id;
+    const totals = calcCategoryTotal(cat);
+    const cc = catCheckedCount(cat);
+    const filtered = state.filterPriority === "all" ? cat.items : cat.items.filter(i => i.priority === state.filterPriority);
+
+    html += `<div class="category ${isOpen?'expanded':''}">
+      <button class="cat-header" onclick="toggleCat('${cat.id}')">
+        <div class="cat-icon" style="background:${cat.bgColor}">${cat.icon}</div>
+        <div class="cat-info">
+          <div class="cat-title">${cat.title}</div>
+          <div class="cat-meta">${cat.items.length} items &middot; $${totals.low}&ndash;$${totals.high} &middot; ${cc}/${cat.items.length} done</div>
+        </div>
+        <span class="cat-chevron ${isOpen?'open':''}">\u25BE</span>
+      </button>`;
+
+    // Always render body but hide via inline style (print CSS forces display)
+    const displayStyle = isOpen ? '' : 'display:none';
+    html += `<div class="cat-body" style="${displayStyle}">
+        <div class="cat-desc">${cat.description}</div>`;
+
+    if (filtered.length === 0) {
+      html += `<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">No ${PRIORITY_LABELS[state.filterPriority]||''} items in this category</div>`;
+    } else {
+      filtered.forEach(item => {
+        const origIdx = cat.items.indexOf(item);
+        const key = cat.id + "-" + origIdx;
+        const checked = !!state.checkedItems[key];
+        html += `<div class="item ${checked?'checked':''}" onclick="toggleItem('${key}')">
+          <div class="checkbox ${checked?'checked':''}">${checked?'\u2713':''}</div>
+          <div class="item-content">
+            <div class="item-name">${item.name}</div>
+            <div class="item-details">
+              <span class="item-qty">${item.qty}</span>
+              <span class="item-price">${item.price}</span>
+              <span class="item-store">${item.store}</span>
+              <span class="priority-tag ${item.priority}">${PRIORITY_LABELS[item.priority]}</span>
+            </div>
+            ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+          </div>
+        </div>`;
+      });
+    }
+    html += `</div></div>`;
+  });
+
+  // Strategy notes
+  html += `
+    <div class="strategy-notes">
+      <h3>Strategy Notes</h3>
+      <p><strong>Phased buying:</strong> Spread grocery purchases over 3-4 ALDI/Kroger trips. Add $30-50 of extra shelf-stable items per trip. Don't panic buy.</p>
+      <p><strong>Solar priority:</strong> The EcoFlow DELTA 2 + 2 panels is your highest-ROI purchase. It keeps RE101 operational during outages and doubles as camping gear. Business continuity = revenue protection.</p>
+      <p><strong>Rotation:</strong> Set a 6-month calendar reminder to rotate food, check batteries, verify meds, and test your power station charge. Use what you store, store what you use.</p>
+      <p><strong>Bug out bags:</strong> Build one for you and Lucy first. Andrew and Sara get age-appropriate versions. Keep by the front door or bedroom closet. A bag you can't grab in 60 seconds is a bag you don't have.</p>
+      <p><strong>Garden supplement:</strong> Plant a raised bed this month. Arkansas zone 7b/8a is ideal right now for tomatoes, peppers, squash, beans, and greens. Seeds from ALDI or Walmart cost $1-2 per packet.</p>
+    </div>
+  `;
+
+  document.getElementById("app").innerHTML = html;
+}
+
+// ═══════════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════════
+function toggleCat(id) {
+  state.expandedCat = state.expandedCat === id ? null : id;
+  render();
+}
+
+function toggleItem(key) {
+  state.checkedItems[key] = !state.checkedItems[key];
+  saveChecked();
+  render();
+}
+
+function setFilter(p) {
+  state.filterPriority = p;
+  render();
+}
+
+function resetChecks() {
+  if (confirm("Reset all checkboxes? This cannot be undone.")) {
+    state.checkedItems = {};
+    saveChecked();
+    render();
+  }
+}
+
+function exportPDF() {
+  // Temporarily expand all categories for print
+  const prev = state.expandedCat;
+  const prevFilter = state.filterPriority;
+  state.expandedCat = "__all__";
+  state.filterPriority = "all";
+
+  // Re-render with all open
+  const gt = grandTotal();
+  const tc = totalChecked();
+  const ti = totalItems();
+
+  let html = `
+    <div class="header">
+      <div class="header-row">
+        <div class="header-icon">\u{1F6E1}</div>
+        <h1>Emergency Preparedness Kit</h1>
+      </div>
+      <div class="subtitle">Thompson Family Shopping List &mdash; 90-day shelter-in-place + 72-hour bug-out capability</div>
+      <div class="summary-strip">
+        <div class="summary-card">
+          <div class="label">Est. Total</div>
+          <div class="value gold">$${gt.low.toLocaleString()}&ndash;$${gt.high.toLocaleString()}</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Progress</div>
+          <div class="value green">${tc} / ${ti}</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Categories</div>
+          <div class="value" style="color:var(--text-primary)">${CATEGORIES.length}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  CATEGORIES.forEach(cat => {
+    const totals = calcCategoryTotal(cat);
+    const cc = catCheckedCount(cat);
+    html += `<div class="category expanded">
+      <div class="cat-header" style="cursor:default">
+        <div class="cat-icon" style="background:${cat.bgColor}">${cat.icon}</div>
+        <div class="cat-info">
+          <div class="cat-title">${cat.title}</div>
+          <div class="cat-meta">${cat.items.length} items &middot; $${totals.low}&ndash;$${totals.high} &middot; ${cc}/${cat.items.length} done</div>
+        </div>
+      </div>
+      <div class="cat-body" style="display:block">
+        <div class="cat-desc">${cat.description}</div>`;
+
+    cat.items.forEach((item, origIdx) => {
+      const key = cat.id + "-" + origIdx;
+      const checked = !!state.checkedItems[key];
+      html += `<div class="item ${checked?'checked':''}">
+        <div class="checkbox ${checked?'checked':''}">${checked?'\u2713':''}</div>
+        <div class="item-content">
+          <div class="item-name">${item.name}</div>
+          <div class="item-details">
+            <span class="item-qty">${item.qty}</span>
+            <span class="item-price">${item.price}</span>
+            <span class="item-store">${item.store}</span>
+            <span class="priority-tag ${item.priority}">${PRIORITY_LABELS[item.priority]}</span>
+          </div>
+          ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+        </div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  html += `
+    <div class="strategy-notes">
+      <h3>Strategy Notes</h3>
+      <p><strong>Phased buying:</strong> Spread grocery purchases over 3-4 ALDI/Kroger trips. Add $30-50 of extra shelf-stable items per trip.</p>
+      <p><strong>Solar priority:</strong> EcoFlow DELTA 2 + 2 panels is the highest-ROI purchase. Business continuity for RE101.</p>
+      <p><strong>Rotation:</strong> 6-month calendar reminder to rotate food, check batteries, verify meds, test power station charge.</p>
+      <p><strong>Bug out bags:</strong> Build for you and Lucy first. Keep by front door. 60-second grab rule.</p>
+      <p><strong>Garden:</strong> Plant raised bed now. AR zone 7b/8a is perfect for spring planting.</p>
+    </div>
+  `;
+
+  document.getElementById("app").innerHTML = html;
+
+  // Trigger print after a brief paint delay
+  setTimeout(() => {
+    window.print();
+    // Restore state after print dialog
+    state.expandedCat = prev;
+    state.filterPriority = prevFilter;
+    render();
+  }, 200);
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+loadState();
+render();
+</script>
+</body>
+</html>
