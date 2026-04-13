@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Field Guide | Thompson Family PrepKit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0c0f14;
+    --bg-secondary: #12161e;
+    --bg-card: rgba(255,255,255,0.025);
+    --bg-card-hover: rgba(255,255,255,0.045);
+    --border: rgba(255,255,255,0.07);
+    --border-active: rgba(255,255,255,0.14);
+    --text-primary: #e8e5e0;
+    --text-secondary: #918b84;
+    --text-muted: #5e5952;
+    --accent-gold: #d4a746;
+    --accent-gold-dim: rgba(212,167,70,0.12);
+    --accent-green: #3a9d6e;
+    --accent-green-dim: rgba(58,157,110,0.15);
+    --accent-red: #c44536;
+    --accent-red-dim: rgba(196,69,54,0.12);
+    --accent-blue: #3a7ca5;
+    --accent-blue-dim: rgba(58,124,165,0.12);
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --font-mono: 'DM Mono', 'Menlo', monospace;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  .app-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* Header */
+  .header { margin-bottom: 28px; }
+  .header-row { display: flex; align-items: center; gap: 14px; }
+  .header-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: linear-gradient(135deg, #c44536 0%, #d4a746 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .header h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.6px; color: #f2efea; }
+  .header .subtitle { font-size: 13px; color: var(--text-muted); margin: 4px 0 0 58px; }
+
+  /* Nav */
+  .nav-bar {
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    margin-top: 16px; margin-bottom: 8px;
+  }
+  .nav-link {
+    padding: 7px 16px; border-radius: 20px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--text-secondary); font-size: 12px; font-weight: 600;
+    font-family: var(--font-body); cursor: pointer; transition: all 0.15s;
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+  }
+  .nav-link:hover { border-color: var(--border-active); color: var(--text-primary); }
+  .nav-link.active { border-color: rgba(212,167,70,0.4); background: var(--accent-gold-dim); color: var(--accent-gold); }
+  .print-btn {
+    padding: 7px 16px; border-radius: 20px;
+    border: 1px solid var(--accent-green); background: var(--accent-green-dim);
+    color: var(--accent-green); font-size: 12px; font-weight: 600;
+    font-family: var(--font-body); cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px; margin-left: auto;
+  }
+  .print-btn:hover { background: rgba(58,157,110,0.25); }
+
+  /* TOC */
+  .toc {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; margin-bottom: 24px;
+  }
+  .toc h2 { font-size: 14px; font-weight: 700; color: var(--accent-gold); margin-bottom: 12px; letter-spacing: -0.2px; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+  .toc a {
+    font-size: 13px; color: var(--text-secondary); text-decoration: none;
+    padding: 4px 0; display: block; transition: color 0.15s;
+  }
+  .toc a:hover { color: var(--accent-gold); }
+  .toc a .num { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-right: 6px; }
+
+  /* Sections */
+  .section {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 16px;
+    animation: fadeUp 0.3s ease both;
+  }
+  .section h2 {
+    font-size: 17px; font-weight: 700; color: var(--accent-gold);
+    margin-bottom: 16px; letter-spacing: -0.3px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .section h3 {
+    font-size: 14px; font-weight: 700; color: var(--text-primary);
+    margin: 18px 0 8px; letter-spacing: -0.1px;
+  }
+  .section h3:first-of-type { margin-top: 0; }
+  .section h4 {
+    font-size: 13px; font-weight: 600; color: var(--accent-blue);
+    margin: 14px 0 6px;
+  }
+
+  .section p, .section li {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.65;
+  }
+  .section ul, .section ol {
+    margin: 6px 0 10px 18px;
+  }
+  .section li { margin-bottom: 4px; }
+  .section strong { color: var(--text-primary); font-weight: 600; }
+
+  /* Tables */
+  .ref-table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 13px; }
+  .ref-table th {
+    text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px;
+    border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02);
+  }
+  .ref-table td {
+    padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.03);
+    color: var(--text-secondary); vertical-align: top;
+  }
+  .ref-table tr:last-child td { border-bottom: none; }
+  .ref-table td:first-child { color: var(--text-primary); font-weight: 500; }
+
+  /* Procedure boxes */
+  .procedure {
+    background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0;
+    border-left: 3px solid var(--accent-gold);
+  }
+  .procedure ol { margin-left: 16px; }
+  .procedure li { margin-bottom: 3px; }
+
+  /* Warning boxes */
+  .warning {
+    background: var(--accent-red-dim); border: 1px solid rgba(196,69,54,0.25);
+    border-radius: var(--radius-sm); padding: 12px 16px; margin: 10px 0;
+    font-size: 13px; color: #e8847a; font-weight: 500;
+  }
+  .warning strong { color: #f5a59e; }
+
+  /* Tip boxes */
+  .tip {
+    background: var(--accent-green-dim); border: 1px solid rgba(58,157,110,0.25);
+    border-radius: var(--radius-sm); padding: 12px 16px; margin: 10px 0;
+    font-size: 13px; color: #6dd5a0; font-weight: 500;
+  }
+
+  /* Knot instructions */
+  .knot-steps {
+    background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px 16px; margin: 8px 0;
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);
+    line-height: 1.7; white-space: pre-line;
+  }
+
+  /* Memory aids */
+  .memory {
+    font-size: 12px; font-style: italic; color: var(--accent-blue);
+    margin: 4px 0 12px; padding-left: 12px;
+    border-left: 2px solid rgba(58,124,165,0.3);
+  }
+
+  /* Rule of Threes banner */
+  .rule-of-threes {
+    background: linear-gradient(135deg, rgba(196,69,54,0.15), rgba(212,167,70,0.15));
+    border: 1px solid rgba(212,167,70,0.3); border-radius: var(--radius);
+    padding: 24px; margin: 24px 0; text-align: center;
+  }
+  .rule-of-threes h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 16px; font-size: 18px; }
+  .threes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .three-item {
+    background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); padding: 14px 8px;
+  }
+  .three-num { font-family: var(--font-mono); font-size: 28px; font-weight: 700; color: var(--accent-gold); }
+  .three-unit { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .three-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Footer */
+  .guide-footer {
+    margin-top: 28px; padding: 20px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); font-size: 12px;
+    color: var(--text-muted); line-height: 1.6;
+  }
+
+  /* Print styles */
+  @media print {
+    :root {
+      --bg-primary: #fff; --bg-secondary: #fff; --bg-card: #fff;
+      --border: #ddd; --text-primary: #111; --text-secondary: #444;
+      --text-muted: #777; --accent-gold: #8a6d1b; --accent-green: #1a7a42;
+      --accent-red: #a33327; --accent-blue: #2a6080;
+      --accent-gold-dim: #f5ecd5; --accent-green-dim: #d4f0e0;
+      --accent-red-dim: #fde8e6; --accent-blue-dim: #d5e8f4;
+    }
+    body { background: #fff !important; color: #111 !important;
+      -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .app-container { padding: 10px 0; max-width: 100%; }
+    .nav-bar { display: none !important; }
+    .section { break-inside: avoid; page-break-inside: avoid; border: 1px solid #ccc; background: #fff !important; }
+    .section h2 { border-bottom: 1px solid #ccc; }
+    .toc { border: 1px solid #ccc; background: #fafafa !important; }
+    .procedure { background: #f9f9f9 !important; border-color: #ccc; border-left-color: #8a6d1b; }
+    .warning { background: #fde8e6 !important; border-color: #dcc; color: #a33327; }
+    .warning strong { color: #811; }
+    .tip { background: #d4f0e0 !important; border-color: #acd; color: #1a5a32; }
+    .knot-steps { background: #f9f9f9 !important; border-color: #ccc; }
+    .memory { color: #2a6080; border-left-color: #2a6080; }
+    .rule-of-threes { background: #f9f5ec !important; border-color: #d4a746; }
+    .three-item { background: #f0ebe0 !important; }
+    .guide-footer { background: #fafafa !important; border-color: #ccc; }
+    .ref-table th { background: #f5f5f5 !important; border-bottom-color: #ccc; }
+    .ref-table td { border-bottom-color: #eee; }
+    @page { size: letter; margin: 0.4in; }
+    h2, h3 { page-break-after: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 20px; }
+    .app-container { padding: 20px 14px 40px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .threes-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.08s; }
+  .section:nth-child(3) { animation-delay: 0.11s; }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-row">
+      <div class="header-icon">&#x1F4D6;</div>
+      <h1>Emergency Field Guide</h1>
+    </div>
+    <div class="subtitle">No-internet survival reference. Print this and keep it with your kit.</div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav-bar">
+    <a href="index.html" class="nav-link">&#x2190; Shopping List</a>
+    <a href="field-guide.html" class="nav-link active">Field Guide</a>
+    <button class="print-btn" onclick="window.print()">&#x1F5A8; Print Field Guide</button>
+  </div>
+
+  <!-- Rule of Threes -->
+  <div class="rule-of-threes">
+    <h2>The Rule of Threes</h2>
+    <div class="threes-grid">
+      <div class="three-item">
+        <div class="three-num">3</div>
+        <div class="three-unit">minutes</div>
+        <div class="three-label">without air</div>
+      </div>
+      <div class="three-item">
+        <div class="three-num">3</div>
+        <div class="three-unit">hours</div>
+        <div class="three-label">without shelter</div>
+      </div>
+      <div class="three-item">
+        <div class="three-num">3</div>
+        <div class="three-unit">days</div>
+        <div class="three-label">without water</div>
+      </div>
+      <div class="three-item">
+        <div class="three-num">3</div>
+        <div class="three-unit">weeks</div>
+        <div class="three-label">without food</div>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-size:13px;color:var(--text-secondary);">Prioritize accordingly: <strong>Immediate danger &gt; Shelter &gt; Water &gt; Food</strong></p>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Quick Reference</h2>
+    <div class="toc-grid">
+      <a href="#water"><span class="num">01</span> Water Purification</a>
+      <a href="#fire"><span class="num">02</span> Fire Starting</a>
+      <a href="#firstaid"><span class="num">03</span> First Aid Essentials</a>
+      <a href="#knots"><span class="num">04</span> Knots</a>
+      <a href="#shelter"><span class="num">05</span> Shelter</a>
+      <a href="#signaling"><span class="num">06</span> Signaling for Help</a>
+      <a href="#navigation"><span class="num">07</span> Navigation</a>
+      <a href="#vehicle"><span class="num">08</span> Vehicle Emergencies</a>
+      <a href="#food"><span class="num">09</span> Food Safety</a>
+      <a href="#weather"><span class="num">10</span> Weather</a>
+      <a href="#comms"><span class="num">11</span> Communication</a>
+      <a href="#numbers"><span class="num">12</span> Important Numbers</a>
+      <a href="#sanitation"><span class="num">13</span> Sanitation</a>
+      <a href="#power"><span class="num">14</span> Power Outage</a>
+    </div>
+  </div>
+
+  <!-- 1. Water Purification -->
+  <div class="section" id="water">
+    <h2>01 &mdash; Water Purification</h2>
+
+    <h3>Boiling</h3>
+    <ul>
+      <li><strong>Rolling boil for 1 minute</strong> at sea level</li>
+      <li><strong>3 minutes</strong> above 6,500 ft elevation</li>
+      <li>Let cool naturally. Do not add ice.</li>
+    </ul>
+
+    <h3>Bleach Disinfection</h3>
+    <p>Use regular unscented household bleach only. No color-safe, no scented, no added cleaners.</p>
+    <table class="ref-table">
+      <tr><th>Bleach Concentration</th><th>Per Gallon</th><th>Per Liter</th></tr>
+      <tr><td>6% sodium hypochlorite</td><td><strong>8 drops</strong> (1/8 tsp)</td><td>2 drops</td></tr>
+      <tr><td>8.25% sodium hypochlorite</td><td><strong>6 drops</strong></td><td>2 drops</td></tr>
+    </table>
+    <ul>
+      <li>Mix thoroughly, let stand <strong>30 minutes</strong> before drinking</li>
+      <li>Should have a slight chlorine smell after 30 min. If not, repeat dose and wait 15 more minutes.</li>
+    </ul>
+
+    <h3>Solar Disinfection (SODIS)</h3>
+    <ol>
+      <li>Use clear PET plastic bottles (1-2 liter soda bottles)</li>
+      <li>Fill with clear water (pre-filter if cloudy)</li>
+      <li>Place on dark or reflective surface in direct sunlight</li>
+      <li><strong>6 hours</strong> in full sun, <strong>2 full days</strong> if cloudy</li>
+    </ol>
+    <div class="warning">Does NOT work through glass or in shade.</div>
+
+    <h3>Improvised Filter</h3>
+    <p>Removes particles, <strong>NOT pathogens</strong>. Always disinfect after filtering.</p>
+    <p>Layer from bottom to top in a container with a drainage hole:</p>
+    <ol>
+      <li>Gravel (coarse)</li>
+      <li>Sand (fine)</li>
+      <li>Charcoal (crushed, from hardwood fire, NOT briquettes)</li>
+      <li>Sand (fine)</li>
+      <li>Gravel (coarse)</li>
+    </ol>
+
+    <h3>Signs of Contaminated Water</h3>
+    <ul>
+      <li>Unusual color, odor, or taste</li>
+      <li>Surface film or foam</li>
+      <li>Blue-green algae (toxic)</li>
+      <li>Proximity to industrial sites, latrines, animal carcasses</li>
+      <li>Stagnant water is higher risk than flowing</li>
+    </ul>
+  </div>
+
+  <!-- 2. Fire Starting -->
+  <div class="section" id="fire">
+    <h2>02 &mdash; Fire Starting</h2>
+
+    <h3>Methods Without Matches</h3>
+
+    <h4>Bow Drill (Friction)</h4>
+    <div class="procedure">
+      <ol>
+        <li>Fireboard: flat, dry softwood (cedar, willow, cottonwood)</li>
+        <li>Spindle: straight, dry softwood stick, 12-18 inches, thumb-width</li>
+        <li>Bow: curved stick with cordage (shoelace, paracord)</li>
+        <li>Socket: hardwood or stone with depression to hold spindle top</li>
+        <li>Cut a V-notch in fireboard with depression. Place tinder bundle below notch.</li>
+        <li>Wrap cordage around spindle, press socket on top, saw bow back and forth</li>
+        <li>Hot coal forms in notch. Transfer to tinder bundle, blow gently.</li>
+      </ol>
+    </div>
+
+    <h4>Flint and Steel / Ferrocerium Rod</h4>
+    <ul>
+      <li>Strike steel against flint at 30-degree angle toward tinder</li>
+      <li>Direct sparks into char cloth or fine tinder</li>
+    </ul>
+
+    <h4>Battery and Steel Wool</h4>
+    <ul>
+      <li>Touch both terminals of a 9V battery to fine (#0000) steel wool</li>
+      <li>Ignites immediately. Have tinder ready.</li>
+    </ul>
+
+    <h4>Magnifying Lens</h4>
+    <ul>
+      <li>Focus sunlight to a pinpoint on dark tinder</li>
+      <li>Works with eyeglasses, binocular lens, bottom of soda can (polished), or clear ice shaped as lens</li>
+    </ul>
+
+    <h3>Tinder (catches spark)</h3>
+    <p>Char cloth, dryer lint, cotton balls with petroleum jelly, birch bark, dry grass, cattail fluff, fatwood shavings, fine wood shavings, dried pine needles</p>
+
+    <h3>Kindling (feeds small flame)</h3>
+    <p>Pencil-thickness dry sticks, small split wood, cardboard strips. Must be bone-dry.</p>
+
+    <h3>Fire Lay Types</h3>
+    <table class="ref-table">
+      <tr><th>Type</th><th>Description</th><th>Best For</th></tr>
+      <tr><td>Teepee</td><td>Lean kindling in cone shape</td><td>Starting fires</td></tr>
+      <tr><td>Log Cabin</td><td>Stack in square layers</td><td>Coal bed for cooking</td></tr>
+      <tr><td>Lean-To</td><td>Lean kindling against a larger log</td><td>Windy conditions</td></tr>
+      <tr><td>Platform</td><td>Large logs bottom, tinder on top</td><td>Long-burning, minimal tending</td></tr>
+      <tr><td>Star</td><td>Push ends of 4-5 logs into center</td><td>Fuel-efficient</td></tr>
+    </table>
+  </div>
+
+  <!-- 3. First Aid -->
+  <div class="section" id="firstaid">
+    <h2>03 &mdash; First Aid Essentials</h2>
+
+    <h3>CPR (Adult)</h3>
+    <div class="procedure">
+      <ol>
+        <li><strong>30 compressions : 2 breaths</strong> (30:2 ratio)</li>
+        <li>Rate: <strong>100-120 per minute</strong></li>
+        <li>Depth: <strong>at least 2 inches</strong>, no more than 2.4 inches</li>
+        <li>Hand placement: center of chest, lower half of breastbone</li>
+        <li>Allow full chest recoil between compressions</li>
+        <li>If untrained: <strong>hands-only CPR</strong> (continuous compressions, no breaths)</li>
+      </ol>
+    </div>
+    <p><strong>Children/infants:</strong> Same 30:2 (one rescuer), 15:2 (two rescuers). Infant compressions: 2 fingers, 1.5 inches deep.</p>
+
+    <h3>Choking (Heimlich) -- Conscious Adult</h3>
+    <div class="procedure">
+      <ol>
+        <li>Stand behind person, wrap arms around waist</li>
+        <li>Make a fist, place thumb side against abdomen above navel, below ribcage</li>
+        <li>Grasp fist with other hand</li>
+        <li>Quick inward-and-upward thrusts</li>
+        <li>Repeat until object is expelled or person becomes unconscious</li>
+        <li>If unconscious: lower to ground, begin CPR, check mouth before each breath</li>
+      </ol>
+    </div>
+
+    <h4>Choking Infant (&lt;1 year)</h4>
+    <ol>
+      <li>Face down on forearm, head lower than chest</li>
+      <li>5 back blows between shoulder blades with heel of hand</li>
+      <li>Flip face up, 5 chest thrusts with 2 fingers on breastbone</li>
+      <li>Alternate until clear</li>
+    </ol>
+
+    <h3>Tourniquet Application</h3>
+    <p><strong>When to use:</strong> Life-threatening extremity bleeding that cannot be controlled by direct pressure.</p>
+    <div class="procedure">
+      <ol>
+        <li>Place <strong>2-3 inches above wound</strong> (never on a joint)</li>
+        <li>Pull band tight and secure through buckle</li>
+        <li>Twist windlass rod until bleeding stops</li>
+        <li>Lock windlass in clip/holder</li>
+        <li><strong>Write the time</strong> on tourniquet or patient's forehead ("TQ" + time)</li>
+        <li><strong>Do NOT loosen or remove</strong> once applied</li>
+      </ol>
+    </div>
+    <div class="tip">Improvised tourniquet: Use 1.5+ inch wide fabric (belt, torn shirt) with a stick as windlass. Never use wire, rope, or narrow material.</div>
+
+    <h3>Wound Care</h3>
+    <ol>
+      <li>Apply <strong>direct pressure</strong> with clean cloth for 10-15 minutes</li>
+      <li>Irrigate wound with clean water under pressure (squeeze bottle)</li>
+      <li>Remove visible debris</li>
+      <li>Apply antibiotic ointment if available</li>
+      <li>Cover with sterile dressing, bandage in place</li>
+      <li>Change dressing every 24 hours or when wet/dirty</li>
+    </ol>
+    <div class="warning"><strong>Infection signs:</strong> Increasing redness, warmth, swelling, pus, red streaks from wound, fever.</div>
+
+    <h3>Burns</h3>
+    <table class="ref-table">
+      <tr><th>Degree</th><th>Appearance</th><th>Action</th></tr>
+      <tr><td>1st (superficial)</td><td>Red, painful, no blisters</td><td>Cool running water 10-20 min, aloe, OTC pain relief</td></tr>
+      <tr><td>2nd (partial)</td><td>Blisters, wet, very painful</td><td>Cool water 10-20 min, do NOT pop blisters, loosely cover</td></tr>
+      <tr><td>3rd (full)</td><td>White/charred, may be painless</td><td>Cover loosely, seek emergency care immediately</td></tr>
+    </table>
+    <div class="warning"><strong>Never use</strong> ice, butter, toothpaste, or adhesive bandages on burns. Chemical burns: flush with water for 20+ minutes.</div>
+
+    <h3>Splinting Fractures</h3>
+    <ol>
+      <li>Immobilize the joint ABOVE and BELOW the fracture</li>
+      <li>Pad the splint (sticks, boards, rolled magazines)</li>
+      <li>Secure with cloth strips, tape, belts. Snug but not tight.</li>
+      <li>Check circulation below splint: pulse, feeling, color, warmth</li>
+      <li><strong>Do NOT attempt to straighten or reset the bone</strong></li>
+    </ol>
+
+    <h3>Recognizing Stroke -- FAST</h3>
+    <table class="ref-table">
+      <tr><td><strong>F</strong>ace</td><td>Ask to smile. Does one side droop?</td></tr>
+      <tr><td><strong>A</strong>rms</td><td>Raise both arms. Does one drift down?</td></tr>
+      <tr><td><strong>S</strong>peech</td><td>Repeat a phrase. Is speech slurred?</td></tr>
+      <tr><td><strong>T</strong>ime</td><td>Note exact time symptoms started. Call 911.</td></tr>
+    </table>
+
+    <h3>Heart Attack Signs</h3>
+    <ul>
+      <li>Chest pain/pressure/squeezing lasting more than a few minutes</li>
+      <li>Pain radiating to left arm, jaw, neck, back, or stomach</li>
+      <li>Shortness of breath, cold sweat, nausea, lightheadedness</li>
+      <li><strong>Women may have atypical symptoms:</strong> fatigue, indigestion, anxiety</li>
+    </ul>
+    <div class="tip"><strong>Action:</strong> Have person chew 1 regular aspirin (325 mg) or 4 baby aspirin (81 mg each) if not allergic. Call 911.</div>
+
+    <h3>Shock Treatment</h3>
+    <p><strong>Signs:</strong> Pale/cool/clammy skin, rapid weak pulse, rapid shallow breathing, confusion, thirst.</p>
+    <ol>
+      <li>Lay person flat on back</li>
+      <li>Elevate legs 8-12 inches (unless head/neck/spine/leg injury)</li>
+      <li>Cover with blanket to maintain warmth</li>
+      <li>Do NOT give food or drink</li>
+      <li>Monitor breathing. Be prepared to begin CPR.</li>
+    </ol>
+  </div>
+
+  <!-- 4. Knots -->
+  <div class="section" id="knots">
+    <h2>04 &mdash; Knots</h2>
+
+    <h3>Bowline -- fixed loop that won't slip</h3>
+    <p><strong>Use:</strong> Rescue loops, anchoring, securing loads</p>
+    <div class="knot-steps">1. Form a small loop ("the rabbit hole") in the standing part
+2. Pass the free end UP through the loop (rabbit comes out of hole)
+3. Route free end BEHIND the standing part (around the tree)
+4. Pass free end back DOWN through the small loop (back in the hole)
+5. Tighten by pulling standing part while holding the free end</div>
+    <div class="memory">"The rabbit comes out of the hole, goes around the tree, and goes back in the hole."</div>
+
+    <h3>Square Knot -- joins two ropes of equal diameter</h3>
+    <p><strong>Use:</strong> Bandages, bundling</p>
+    <div class="knot-steps">1. Hold one end in each hand
+2. Right over left, tuck under
+3. Left over right, tuck under
+4. Tighten evenly</div>
+    <div class="memory">"Right over left, left over right." Both free ends should exit on the SAME side.</div>
+
+    <h3>Clove Hitch -- quick attachment to a post or pole</h3>
+    <p><strong>Use:</strong> Starting lashings, temporary tie-off</p>
+    <div class="knot-steps">1. Wrap rope around post
+2. Cross over the first wrap
+3. Tuck free end under the second wrap (under the X)
+4. Pull tight</div>
+    <div class="tip">Can slip under variable load. Secure with a half-hitch for safety.</div>
+
+    <h3>Taut-Line Hitch -- adjustable tension loop</h3>
+    <p><strong>Use:</strong> Tent guy lines, adjustable tie-downs</p>
+    <div class="knot-steps">1. Wrap rope around anchor (stake, tree)
+2. Pass free end inside the loop: two wraps toward the anchor
+3. One more wrap outside (above) the first two, going away from anchor
+4. Pass free end through this last loop
+5. Slide to adjust tension. Holds under load.</div>
+
+    <h3>Trucker's Hitch -- mechanical advantage for tight tie-downs</h3>
+    <p><strong>Use:</strong> Securing loads to vehicles, clotheslines, tarps</p>
+    <div class="knot-steps">1. Tie a fixed loop in the standing part (use a slip knot)
+2. Route free end around anchor point (hook, stake)
+3. Thread free end back through the loop -- creates a 3:1 pulley
+4. Pull tight
+5. Secure with two half-hitches against the loop</div>
+    <div class="tip">Gives roughly 3:1 mechanical advantage.</div>
+
+    <h3>Figure-Eight -- stopper knot</h3>
+    <p><strong>Use:</strong> Climbing, preventing rope from pulling through</p>
+    <div class="knot-steps">1. Make a loop in the rope
+2. Pass free end around behind the standing part
+3. Thread free end through the original loop
+4. Result looks like the number 8</div>
+    <div class="memory">For a figure-eight loop: tie figure-eight, pass free end around anchor, retrace the path back through.</div>
+  </div>
+
+  <!-- 5. Shelter -->
+  <div class="section" id="shelter">
+    <h2>05 &mdash; Shelter</h2>
+
+    <h3>Site Selection</h3>
+    <ul>
+      <li><strong>Avoid:</strong> Hilltops (wind/lightning), valley floors (cold air, flooding), dead trees, dry riverbeds</li>
+      <li><strong>Seek:</strong> Natural windbreaks, south-facing slopes, near water but above flood line</li>
+      <li><strong>Check above for "widow-makers"</strong> (dead hanging branches)</li>
+    </ul>
+
+    <h3>Basic Lean-To</h3>
+    <div class="procedure">
+      <ol>
+        <li>Place a <strong>ridgepole</strong> (8-12 ft) between two trees at chest height</li>
+        <li>Lean branches at <strong>45-60 degree angle</strong> against the ridgepole on the windward side</li>
+        <li>Layer debris from <strong>bottom to top</strong> (like shingles): leaves, pine boughs, bark, grass</li>
+        <li>Minimum <strong>2-3 feet thick</strong> debris layer for rain protection</li>
+        <li>Build a bed of dry leaves/pine needles <strong>4-6 inches thick</strong> on the ground</li>
+        <li>Orient opening <strong>away from prevailing wind</strong>, ideally toward a fire</li>
+      </ol>
+    </div>
+
+    <h3>Insulation Principles</h3>
+    <div class="warning"><strong>Ground insulation is #1 priority.</strong> The ground steals body heat 25x faster than air.</div>
+    <ul>
+      <li>Use leaves, pine needles, grass, cardboard, foam, newspapers</li>
+      <li>Dead air space = insulation. Smaller shelter = easier to heat with body warmth.</li>
+      <li>In snow: body heat can warm an enclosed snow shelter to 32F even in subzero conditions</li>
+    </ul>
+
+    <h3>Emergency Materials</h3>
+    <table class="ref-table">
+      <tr><td>Trash bags</td><td>Cut open for poncho or rain fly. Stuff with leaves for insulation.</td></tr>
+      <tr><td>Space blankets (mylar)</td><td>Reflective side facing body retains ~90% of radiated body heat</td></tr>
+      <tr><td>Tarps</td><td>A-frame or lean-to configuration with paracord</td></tr>
+      <tr><td>Vehicle</td><td>Stay with your vehicle in most situations. Visible and provides shelter.</td></tr>
+      <tr><td>Snow</td><td>Quinzhee (packed snow mound, hollowed out) or snow trench with branches/tarp cover</td></tr>
+    </table>
+  </div>
+
+  <!-- 6. Signaling -->
+  <div class="section" id="signaling">
+    <h2>06 &mdash; Signaling for Help</h2>
+
+    <h3>Universal Distress Signals</h3>
+    <div class="tip"><strong>3 of anything = distress.</strong> 3 whistle blasts, 3 fires, 3 gunshots, 3 flashes. Pause between sets and repeat.</div>
+    <p>A whistle carries farther than your voice and requires less energy.</p>
+
+    <h3>Ground-to-Air Signals</h3>
+    <p>Make at least 10 ft tall. Use contrast with ground (rocks, logs, trampled snow, clothing).</p>
+    <table class="ref-table">
+      <tr><th>Symbol</th><th>Meaning</th></tr>
+      <tr><td><strong>V</strong></td><td>Need assistance</td></tr>
+      <tr><td><strong>X</strong></td><td>Need medical help</td></tr>
+      <tr><td><strong>I</strong></td><td>Need supplies</td></tr>
+      <tr><td><strong>&rarr;</strong> (arrow)</td><td>Traveling this direction</td></tr>
+      <tr><td><strong>LL</strong></td><td>All is well</td></tr>
+    </table>
+
+    <h3>Signal Mirror</h3>
+    <ol>
+      <li>Hold mirror near face, extend opposite hand toward target (aircraft, rescuers)</li>
+      <li>Reflect light onto your extended hand</li>
+      <li>Adjust angle so reflected light flashes across your fingers toward target</li>
+      <li>Sweep slowly back and forth</li>
+    </ol>
+    <div class="tip">A signal mirror can be seen <strong>up to 50 miles</strong> in clear conditions. Any reflective surface works: CD, phone screen, polished metal, foil.</div>
+
+    <h3>Signal Fire</h3>
+    <ul>
+      <li>3 fires in a triangle (~100 ft apart) = international distress signal</li>
+      <li>Green branches/leaves for <strong>white smoke</strong> (visible against dark backgrounds)</li>
+      <li>Oil, rubber, or plastic for <strong>black smoke</strong> (visible against snow/clouds)</li>
+    </ul>
+  </div>
+
+  <!-- 7. Navigation -->
+  <div class="section" id="navigation">
+    <h2>07 &mdash; Navigation</h2>
+
+    <h3>Stick Shadow Method (most reliable)</h3>
+    <div class="procedure">
+      <ol>
+        <li>Place a straight stick (3+ ft) vertically in the ground on flat, sunny terrain</li>
+        <li>Mark the tip of the shadow with a stone. This is <strong>West</strong>.</li>
+        <li>Wait <strong>15-30 minutes</strong></li>
+        <li>Mark the new shadow tip. This is <strong>East</strong>.</li>
+        <li>Draw a line between the two marks: this is your East-West line</li>
+        <li>Stand with the first mark (W) on your left, second mark (E) on your right</li>
+        <li>You are facing <strong>North</strong> (Northern Hemisphere)</li>
+      </ol>
+    </div>
+
+    <h3>North Star (Polaris)</h3>
+    <ol>
+      <li>Find the Big Dipper (Ursa Major)</li>
+      <li>The two stars forming the outer edge of the "cup" are pointer stars</li>
+      <li>Extend a line from these two stars about 5x their spacing</li>
+      <li>Points to Polaris (last star in the Little Dipper's handle)</li>
+      <li>Polaris indicates True North (within ~1 degree)</li>
+    </ol>
+
+    <h3>Watch Method (analog)</h3>
+    <p><strong>Northern Hemisphere:</strong> Point the <strong>hour hand</strong> at the sun. Bisect the angle between the hour hand and 12 o'clock. That line points roughly <strong>South</strong>.</p>
+    <p><strong>Southern Hemisphere:</strong> Point <strong>12 o'clock</strong> at the sun. Bisect the angle between 12 and the hour hand. That line points roughly <strong>North</strong>.</p>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:6px;">Adjust for Daylight Saving Time (use position where 1 o'clock would be standard time).</p>
+
+    <h3>Basic Map Reading</h3>
+    <ul>
+      <li>Top of map = North (unless otherwise marked)</li>
+      <li><strong>Contour lines</strong> close together = steep. Far apart = gentle slope.</li>
+      <li>V's pointing uphill = valley. Pointing downhill = ridge.</li>
+      <li>Blue = water, green = vegetation, brown = contour lines, black = man-made</li>
+      <li><strong>1:24,000 scale</strong> (common USGS): 1 inch = 2,000 feet (~0.4 miles)</li>
+    </ul>
+  </div>
+
+  <!-- 8. Vehicle Emergencies -->
+  <div class="section" id="vehicle">
+    <h2>08 &mdash; Vehicle Emergencies</h2>
+
+    <h3>Jump Starting a Car</h3>
+    <div class="procedure">
+      <ol>
+        <li>Position cars so batteries are close. Vehicles must NOT touch.</li>
+        <li>Turn off both engines and all accessories</li>
+        <li>Identify positive (+) and negative (-) terminals on both batteries</li>
+        <li><strong style="color:var(--accent-red);">RED</strong> cable to <strong>DEAD battery positive (+)</strong></li>
+        <li><strong style="color:var(--accent-red);">RED</strong> cable other end to <strong>GOOD battery positive (+)</strong></li>
+        <li><strong>BLACK</strong> cable to <strong>GOOD battery negative (-)</strong></li>
+        <li><strong>BLACK</strong> cable other end to <strong>unpainted metal on dead car's engine block</strong> (NOT the dead battery negative)</li>
+        <li>Start the working vehicle, let run 2-3 minutes</li>
+        <li>Start the dead vehicle</li>
+        <li><strong>Remove cables in REVERSE order</strong> (7, 6, 5, 4)</li>
+        <li>Drive the revived vehicle for at least <strong>15-20 minutes</strong></li>
+      </ol>
+    </div>
+    <div class="warning">Step 7 is critical. Grounding to the engine block avoids sparks near the battery, which can release flammable hydrogen gas.</div>
+
+    <h3>Changing a Tire</h3>
+    <div class="procedure">
+      <ol>
+        <li>Pull to flat, stable surface. Turn on hazards.</li>
+        <li>Apply parking brake. Chock opposite tires (rocks, wood).</li>
+        <li><strong>Loosen lug nuts 1/2 turn BEFORE jacking</strong> (counterclockwise)</li>
+        <li>Place jack on vehicle's designated jack point (check owner's manual)</li>
+        <li>Raise until flat tire is ~6 inches off ground</li>
+        <li>Remove lug nuts, remove flat tire</li>
+        <li>Mount spare, hand-tighten lug nuts in a <strong>star/cross pattern</strong></li>
+        <li>Lower until tire touches ground but doesn't bear full weight</li>
+        <li><strong>Fully tighten lug nuts</strong> in star pattern</li>
+        <li>Lower completely, remove jack</li>
+      </ol>
+    </div>
+    <div class="tip"><strong>Compact/donut spares:</strong> Max speed 50 mph, max distance 50-70 miles.</div>
+
+    <h3>Stranded in Vehicle</h3>
+    <ul>
+      <li><strong>Stay with the vehicle</strong> (easier to spot than a person on foot)</li>
+      <li>Run engine <strong>10-15 minutes per hour</strong> for heat. Crack window slightly for ventilation.</li>
+      <li>Ensure tailpipe is clear of snow/mud/debris</li>
+      <li>Tie bright cloth to antenna or hang from window</li>
+      <li>Dome light on at night</li>
+      <li>In snow: stomp out large SOS or HELP near vehicle</li>
+      <li>Phone: airplane mode, text instead of call (uses less power)</li>
+    </ul>
+  </div>
+
+  <!-- 9. Food Safety -->
+  <div class="section" id="food">
+    <h2>09 &mdash; Food Safety</h2>
+
+    <h3>Food Without Refrigeration</h3>
+    <table class="ref-table">
+      <tr><th>Food</th><th>Shelf Life (above 40F)</th></tr>
+      <tr><td>Hard cheese (wax-coated)</td><td>1-2 weeks</td></tr>
+      <tr><td>Butter</td><td>1-2 days</td></tr>
+      <tr><td>Eggs (unwashed, farm-fresh)</td><td>2-3 weeks</td></tr>
+      <tr><td>Eggs (store-bought, US)</td><td>2 hours</td></tr>
+      <tr><td>Canned goods (unopened)</td><td>Years</td></tr>
+      <tr><td>Canned goods (opened)</td><td>4 hours</td></tr>
+      <tr><td>Cooked or raw meat</td><td><strong>2 hours max</strong> (1 hr if &gt;90F)</td></tr>
+      <tr><td>Peanut butter (unopened)</td><td>Months</td></tr>
+      <tr><td>Honey</td><td>Indefinitely</td></tr>
+      <tr><td>White rice / dried beans</td><td>2+ years</td></tr>
+    </table>
+
+    <h3>Safe Cooking Temperatures</h3>
+    <table class="ref-table">
+      <tr><th>Food</th><th>Internal Temp</th></tr>
+      <tr><td>Poultry (chicken, turkey)</td><td><strong>165F (74C)</strong></td></tr>
+      <tr><td>Ground meat (beef, pork)</td><td><strong>160F (71C)</strong></td></tr>
+      <tr><td>Whole cuts beef/pork/lamb</td><td><strong>145F (63C)</strong> + 3-min rest</td></tr>
+      <tr><td>Fish and shellfish</td><td><strong>145F (63C)</strong></td></tr>
+      <tr><td>Leftovers / casseroles</td><td><strong>165F (74C)</strong></td></tr>
+    </table>
+
+    <h3>Universal Edibility Test (last resort)</h3>
+    <div class="warning"><strong>Do NOT use for mushrooms.</strong> No safe field test exists for wild mushrooms.</div>
+    <ol>
+      <li>Test one plant part at a time (leaf, stem, root, fruit separately)</li>
+      <li>Fast for 8 hours before testing</li>
+      <li><strong>Skin:</strong> Crush and rub on inner wrist. Wait 15 minutes.</li>
+      <li><strong>Lip:</strong> Touch to outer lip. Wait 15 minutes.</li>
+      <li><strong>Tongue:</strong> Place on tongue. Wait 15 minutes. Spit out.</li>
+      <li><strong>Chew:</strong> Chew and hold in mouth 15 minutes. Do NOT swallow. Spit out.</li>
+      <li>If no reaction: swallow a small amount. <strong>Wait 8 hours.</strong></li>
+      <li>If still fine: eat a small handful. Wait another 8 hours.</li>
+    </ol>
+    <p style="margin-top:8px;"><strong>Avoid plants with:</strong> milky/discolored sap, beans/seeds in pods, bitter/soapy taste, almond scent, thorns on leaves, "three-leaf" pattern.</p>
+  </div>
+
+  <!-- 10. Weather -->
+  <div class="section" id="weather">
+    <h2>10 &mdash; Weather</h2>
+
+    <h3>Reading Clouds</h3>
+    <table class="ref-table">
+      <tr><th>Cloud Type</th><th>What It Means</th></tr>
+      <tr><td>Cirrus (thin, wispy, high)</td><td>Fair now. Weather change in 24-48 hrs.</td></tr>
+      <tr><td>Cumulus (white, puffy)</td><td>Fair if small. Watch if growing tall.</td></tr>
+      <tr><td>Cumulonimbus (tall, dark, anvil)</td><td><strong>Thunderstorms, hail, tornadoes.</strong> Seek shelter.</td></tr>
+      <tr><td>Stratus (gray blanket, low)</td><td>Drizzle, overcast. Generally not severe.</td></tr>
+      <tr><td>Nimbostratus (dark, thick, low)</td><td>Steady rain or snow for hours.</td></tr>
+      <tr><td>Lenticular (lens-shaped, near mountains)</td><td>Very high winds. Do not go higher.</td></tr>
+    </table>
+
+    <h3>Other Indicators</h3>
+    <ul>
+      <li>Rapidly falling barometric pressure = storm approaching</li>
+      <li>Wind shifting counterclockwise (N. Hemisphere) = weather deteriorating</li>
+      <li>Ring around moon/sun = rain/snow within 24-48 hrs</li>
+    </ul>
+
+    <h3>Lightning Safety -- 30/30 Rule</h3>
+    <div class="tip">If time between flash and thunder is <strong>30 seconds or less</strong> (~6 miles), seek shelter. Stay sheltered until <strong>30 minutes</strong> after last thunder.</div>
+    <ul>
+      <li>Safest: enclosed building or hard-topped vehicle</li>
+      <li><strong>Avoid:</strong> tall isolated trees, hilltops, open water, metal fences, open fields</li>
+      <li>If caught in open: crouch low on balls of feet, minimize ground contact, cover ears</li>
+      <li>If someone is struck: safe to touch immediately. Begin CPR if needed.</li>
+    </ul>
+
+    <h3>Tornado Safety</h3>
+    <ul>
+      <li><strong>Warning signs:</strong> dark/green sky, large hail, loud roar (freight train), rotating wall cloud</li>
+      <li><strong>Shelter:</strong> lowest interior room (bathroom, closet), away from windows, under sturdy furniture</li>
+      <li><strong>In a vehicle:</strong> do NOT outrun. Drive perpendicular to path. If trapped, park, seatbelt on, duck below windows.</li>
+      <li><strong>Mobile home:</strong> evacuate to sturdy structure or low ground</li>
+    </ul>
+
+    <h3>Hurricane Safety</h3>
+    <ul>
+      <li><strong>Evacuate if ordered</strong></li>
+      <li>Fill bathtub with water before storm (flushing/cleaning)</li>
+      <li>The eye is calm but the storm will resume. Stay sheltered.</li>
+      <li>After: avoid floodwater and downed power lines</li>
+    </ul>
+  </div>
+
+  <!-- 11. Communication -->
+  <div class="section" id="comms">
+    <h2>11 &mdash; Communication</h2>
+
+    <h3>Emergency Frequencies</h3>
+    <table class="ref-table">
+      <tr><th>Service</th><th>Frequency / Channel</th></tr>
+      <tr><td>Marine distress (VHF)</td><td><strong>Channel 16</strong> (156.800 MHz)</td></tr>
+      <tr><td>Aviation emergency</td><td><strong>121.500 MHz</strong></td></tr>
+      <tr><td>CB Radio emergency</td><td><strong>Channel 9</strong> (27.065 MHz)</td></tr>
+      <tr><td>NOAA Weather Radio</td><td>162.400, .425, .450, .475, .500, .525, .550 MHz</td></tr>
+      <tr><td>Ham 2m calling freq</td><td><strong>146.520 MHz</strong> (FM simplex)</td></tr>
+      <tr><td>Ham 70cm calling freq</td><td><strong>446.000 MHz</strong> (FM simplex)</td></tr>
+    </table>
+
+    <h3>FRS / GMRS Channels</h3>
+    <table class="ref-table">
+      <tr><th>Channels</th><th>Type</th><th>Notes</th></tr>
+      <tr><td>1-7</td><td>FRS/GMRS shared</td><td>0.5W FRS, up to 5W GMRS</td></tr>
+      <tr><td>8-14</td><td>FRS only</td><td>0.5W, no license</td></tr>
+      <tr><td>15-22</td><td>GMRS</td><td>Up to 50W, license required</td></tr>
+    </table>
+    <ul>
+      <li><strong>FRS:</strong> No license required. Range ~0.5-2 miles.</li>
+      <li><strong>GMRS:</strong> FCC license required (~$35, 10 years, no exam). Range 1-25+ miles.</li>
+    </ul>
+
+    <h3>Ham Radio Basics</h3>
+    <ul>
+      <li>Technician license needed to transmit (exam required, no Morse code)</li>
+      <li><strong>VHF (2m, 144-148 MHz):</strong> Local. Repeaters extend range to 50+ miles.</li>
+      <li><strong>UHF (70cm, 420-450 MHz):</strong> Good for buildings/urban areas.</li>
+      <li><strong>HF (3-30 MHz):</strong> Long distance / worldwide.</li>
+    </ul>
+    <div class="tip">In a true emergency, <strong>anyone may transmit on any frequency</strong> if there is immediate danger to life or property (FCC Part 97.403).</div>
+  </div>
+
+  <!-- 12. Important Numbers -->
+  <div class="section" id="numbers">
+    <h2>12 &mdash; Important Numbers</h2>
+
+    <h3>Emergency Contacts</h3>
+    <table class="ref-table">
+      <tr><td>Emergency (US)</td><td><strong>911</strong></td></tr>
+      <tr><td>Poison Control (US)</td><td><strong>1-800-222-1222</strong></td></tr>
+      <tr><td>Suicide and Crisis Lifeline</td><td><strong>988</strong></td></tr>
+      <tr><td>FEMA Helpline</td><td><strong>1-800-621-3362</strong></td></tr>
+      <tr><td>National Domestic Violence</td><td><strong>1-800-799-7233</strong></td></tr>
+      <tr><td>Red Cross</td><td><strong>1-800-733-2767</strong></td></tr>
+      <tr><td>Coast Guard</td><td>VHF Channel 16 or 911</td></tr>
+    </table>
+
+    <h3>FEMA Regions</h3>
+    <table class="ref-table">
+      <tr><th>Region</th><th>States</th></tr>
+      <tr><td>I</td><td>CT, MA, ME, NH, RI, VT</td></tr>
+      <tr><td>II</td><td>NJ, NY, Puerto Rico, US Virgin Islands</td></tr>
+      <tr><td>III</td><td>DC, DE, MD, PA, VA, WV</td></tr>
+      <tr><td>IV</td><td>AL, FL, GA, KY, MS, NC, SC, TN</td></tr>
+      <tr><td>V</td><td>IL, IN, MI, MN, OH, WI</td></tr>
+      <tr><td>VI</td><td>AR, LA, NM, OK, TX</td></tr>
+      <tr><td>VII</td><td>IA, KS, MO, NE</td></tr>
+      <tr><td>VIII</td><td>CO, MT, ND, SD, UT, WY</td></tr>
+      <tr><td>IX</td><td>AZ, CA, HI, NV, Pacific territories</td></tr>
+      <tr><td>X</td><td>AK, ID, OR, WA</td></tr>
+    </table>
+
+    <h3>Personal Emergency Info (fill in and keep in wallet)</h3>
+    <div class="knot-steps" style="line-height:2.2;">Name: ___________________________
+DOB: ____________________________
+Blood Type: ______________________
+Allergies: ______________________
+Medications: ____________________
+Medical Conditions: ______________
+Emergency Contact 1: ____________  Phone: ___________
+Emergency Contact 2: ____________  Phone: ___________
+Doctor: _________________________  Phone: ___________
+Insurance: ______________________  Policy #: ________
+Meeting Point 1 (local): ___________________________
+Meeting Point 2 (regional): ________________________
+Out-of-area contact: _____________  Phone: ___________</div>
+  </div>
+
+  <!-- 13. Sanitation -->
+  <div class="section" id="sanitation">
+    <h2>13 &mdash; Sanitation</h2>
+
+    <h3>Emergency Bucket Toilet</h3>
+    <ol>
+      <li>Line a 5-gallon bucket with heavy-duty trash bag</li>
+      <li>Place pool noodle or pipe insulation on rim for a seat (or snap-on toilet seat lid)</li>
+      <li>After each use: cover waste with kitty litter, sawdust, wood ash, or dirt</li>
+      <li>When bag is 2/3 full, tie off securely and dispose properly</li>
+      <li>Keep hand sanitizer or handwashing station immediately adjacent</li>
+    </ol>
+
+    <h3>Cat Hole (outdoor, short-term)</h3>
+    <ul>
+      <li>Dig hole <strong>6-8 inches deep</strong></li>
+      <li>At least <strong>200 feet from water sources, trails, and camp</strong></li>
+      <li>Cover with original soil</li>
+      <li>Pack out toilet paper in a sealed bag (or burn carefully)</li>
+    </ul>
+
+    <h3>Waste Disposal</h3>
+    <ul>
+      <li>Never dump waste in or near water sources</li>
+      <li>Bury human waste at least 200 ft (70 paces) from water</li>
+      <li>Store trash away from living area</li>
+      <li>Dead animals: bury at least 3 feet deep, 200+ feet from water and camp</li>
+    </ul>
+
+    <h3>Hand Hygiene Without Running Water</h3>
+    <h4>Improvised Handwashing Station</h4>
+    <ul>
+      <li>Poke small hole near bottom of a water jug. Plug with tape/twig. Release to create trickle, lather with soap.</li>
+      <li>Or: fill a large Ziploc bag, poke small hole in bottom corner</li>
+    </ul>
+    <h4>Without Soap</h4>
+    <ul>
+      <li>Wood ash + water creates a mild lye soap</li>
+      <li>Sand works as an abrasive scrub (rinse after)</li>
+      <li>Hand sanitizer (60%+ alcohol) kills germs but does NOT remove dirt</li>
+      <li><strong>20 seconds minimum</strong> washing time</li>
+    </ul>
+  </div>
+
+  <!-- 14. Power Outage -->
+  <div class="section" id="power">
+    <h2>14 &mdash; Power Outage</h2>
+
+    <h3>Generator Safety</h3>
+    <div class="warning">
+      <strong>NEVER run a generator indoors, in a garage, or in any enclosed space.</strong><br>
+      Carbon monoxide (CO) is colorless and odorless. It kills within minutes.
+    </div>
+    <ul>
+      <li>Place generator <strong>at least 20 feet from the house</strong>, exhaust away from windows/doors</li>
+      <li>Install battery-powered CO detectors on every level</li>
+      <li>CO symptoms: headache, dizziness, nausea, confusion, loss of consciousness</li>
+      <li>If CO suspected: <strong>get everyone outside immediately</strong>, call 911</li>
+      <li>Let generator cool before refueling</li>
+      <li><strong>Never</strong> connect generator directly to house wiring (can kill utility workers). Use a transfer switch or plug devices directly.</li>
+    </ul>
+
+    <h3>Battery Conservation</h3>
+    <ul>
+      <li><strong>Phone:</strong> airplane mode, minimum brightness, close background apps, disable Bluetooth/Wi-Fi/location</li>
+      <li>Turn phone off completely when not using it</li>
+      <li>Airplane mode can stretch battery to <strong>4-7 days</strong> with minimal use</li>
+      <li>Text messages use less power than voice calls</li>
+      <li><strong>Car battery:</strong> charge USB devices via 12V port. Run engine 10-15 min.</li>
+    </ul>
+
+    <h3>Alternative Lighting</h3>
+    <table class="ref-table">
+      <tr><td>Headlamps</td><td>Preferable to flashlights (hands-free)</td></tr>
+      <tr><td>Candles</td><td>Never leave unattended. Stable holder on nonflammable surface.</td></tr>
+      <tr><td>Cooking oil lamp</td><td>Heat-safe container + cotton wick resting on rim</td></tr>
+      <tr><td>Shortening candle</td><td>Push cotton wick into open can of Crisco. Burns for hours.</td></tr>
+      <tr><td>Glow sticks</td><td>8-12 hours. Safe around children, no fire risk.</td></tr>
+      <tr><td>Solar garden lights</td><td>Bring inside at night, recharge outside during the day</td></tr>
+    </table>
+
+    <h3>Food Preservation During Outage</h3>
+    <ul>
+      <li><strong>Refrigerator:</strong> keeps food cold ~4 hours if door stays closed</li>
+      <li><strong>Full freezer:</strong> holds temperature ~48 hours. Half-full ~24 hours.</li>
+      <li><strong>Do NOT open doors</strong> unnecessarily</li>
+      <li>Move food to coolers with ice if outage will be prolonged</li>
+      <li>Frozen food with ice crystals or at 40F or below can be safely refrozen</li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <div class="guide-footer">
+    <p>This guide contains general emergency preparedness information compiled from widely published sources including FEMA, the American Red Cross, the CDC, the American Heart Association, the Wilderness Medical Society, and established survival training curricula. Always seek professional medical care when available. Practice these skills before you need them.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

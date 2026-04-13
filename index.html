@@ -712,6 +712,7 @@ function render() {
           `<button class="filter-btn ${state.filterPriority===p?'active':''}" onclick="setFilter('${p}')">${p==='all'?'All Items':PRIORITY_LABELS[p]}</button>`
         ).join("")}
         <div class="toolbar-spacer"></div>
+        <a href="field-guide.html" class="pdf-btn" style="text-decoration:none;">\u{1F4D6} Field Guide</a>
         <button class="pdf-btn" onclick="exportPDF()">\u{1F4C4} Download PDF</button>
         <button class="reset-btn" onclick="resetChecks()">Reset</button>
       </div>
